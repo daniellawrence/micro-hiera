@@ -1,0 +1,13 @@
+file: a_over_1.yml
+list:
+  - a_over_1.yml
+
+# comment
+map:
+  file: a_over_1.yml
+  file_list:
+    - a_over_1.yml
+
+new_key_for_a_over_1: true
+
+# duplicate_value_in_over_as_base: true

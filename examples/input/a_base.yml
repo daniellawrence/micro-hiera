@@ -1,0 +1,10 @@
+file: a_base.yml
+list:
+  - a_base.yml
+
+map:
+  file: a_base.yml
+  file_list:
+    - a_base.yml
+
+duplicate_value_in_over_as_base: true

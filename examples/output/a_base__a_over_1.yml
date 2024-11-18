@@ -1,0 +1,11 @@
+duplicate_value_in_over_as_base: true
+file: a_over_1.yml
+list:
+  - a_over_1.yml
+  - a_base.yml
+map:
+  file: a_over_1.yml
+  file_list:
+    - a_over_1.yml
+    - a_base.yml
+new_key_for_a_over_1: true
