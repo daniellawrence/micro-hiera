@@ -15,12 +15,12 @@ import (
 )
 
 var (
-	outFile string = "/dev/stdout"
+// outFile string = "/dev/stdout"
 )
 
-// renderCmd represents the render command
-var renderCmd = &cobra.Command{
-	Use:    "render",
+// mergeCmd represents the merge command
+var mergeCmd = &cobra.Command{
+	Use:    "merge",
 	Short:  "A brief description of your command",
 	PreRun: toggleDebug,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -44,6 +44,7 @@ var renderCmd = &cobra.Command{
 			for name, count := range m.CountViolationByType() {
 				fmt.Printf("%-30s %-d\n", name, count)
 			}
+			log.Exit(1)
 		} else {
 			fmt.Println(string(mergedBytes))
 		}
@@ -52,6 +53,6 @@ var renderCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(renderCmd)
-	renderCmd.Flags().StringVarP(&outFile, "out", "o", outFile, "file that will contain the newly merged data")
+	rootCmd.AddCommand(mergeCmd)
+	// mergeCmd.Flags().StringVarP(&outFile, "out", "o", outFile, "file that will contain the newly merged data")
 }

@@ -1,4 +1,4 @@
-# MicroMerge
+# Micro Hiera
 
 Merge multiple yaml files together
 
@@ -13,7 +13,7 @@ Merge multiple yaml files together
 Example file has `.duplicate_value_in_over_as_base` defined with the same value in 2 files
 
 ```sh
-$ ./micro-hiera render ./examples/input/*
+$ ./micro-hiera merge ./examples/input/*
 DUPLICATE_OVERRIDE_VALUE: ./examples/input/a_over_1.yml duplicate value at path:.duplicate_value_in_over_as_base
 
 violation                      count
@@ -24,7 +24,7 @@ DUPLICATE_OVERRIDE_VALUE       1
 Correcting the issue by deleting `.duplicate_value_in_over_as_base` from `./examples/input/a_over_1.yml`
 
 ```sh
-$ ./micro-hierarender ./examples/input/*
+$ ./micro-hiera merge ./examples/input/*
 duplicate_value_in_over_as_base: true
 file: a_over_1.yml
 list:

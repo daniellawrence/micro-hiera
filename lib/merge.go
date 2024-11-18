@@ -60,7 +60,7 @@ func (m *Merger) MergeFiles(fileList []string) map[interface{}]interface{} {
 
 	for _, filePath := range m.MergeFileList[1:] {
 		override, err = m.ReadFilePathAsYaml(filePath)
-		m.Mergerecursive(baseFilePath, filePath, &base, &override, ".")
+		m.Mergerecursive(baseFilePath, filePath, &base, &override, "")
 		baseFilePath = filePath
 	}
 
@@ -91,7 +91,7 @@ func (m *Merger) Mergerecursive(baseFilePath string, overrideFilePath string, ba
 	}
 
 	for k, overrideValue := range *override {
-		currentObjectPath := fmt.Sprintf("%s%s", objectPath, k)
+		currentObjectPath := fmt.Sprintf("%s.%s", objectPath, k)
 		baseValue, exists := (*base)[k]
 		if exists {
 			overrideValueType := reflect.TypeOf(overrideValue).String()
