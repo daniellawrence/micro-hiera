@@ -1,6 +1,6 @@
 module github.com/daniellawrence/micro-hiera
 
-go 1.23.1
+go 1.23
 
 require (
 	github.com/sirupsen/logrus v1.9.3
