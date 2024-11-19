@@ -101,6 +101,8 @@ func (m *Merger) Mergerecursive(baseFilePath string, overrideFilePath string, ba
 				if reflect.TypeOf((*base)[k]).String() == MAP_TYPE {
 					basenode := (*base)[k].(map[interface{}]interface{})
 					m.Mergerecursive(baseFilePath, overrideFilePath, &basenode, &overrideNode, currentObjectPath)
+				} else if (*base)[k] == nil {
+					(*base)[k] = overrideNode
 				} else {
 					m.handleViolation(VIOLATION_NON_MAP_MERGE, fmt.Errorf("%s contains map at path:%s, base is not a map", overrideFilePath, currentObjectPath))
 				}
@@ -134,16 +136,16 @@ func (m *Merger) ReadFilePathAsYaml(path string) (map[interface{}]interface{}, e
 
 	fileContent, err := os.ReadFile(path)
 	if err != nil {
-		err = m.handleViolation(VIOLATION_MISSING_INPUT_FILE, err)
+		err = m.handleViolation(VIOLATION_MISSING_INPUT_FILE, fmt.Errorf("failed to read input file: %s", path))
 		return asYaml, err
 	}
 	if len(fileContent) == 0 {
-		err = m.handleViolation(VIOLATION_INVALID_INPUT_FILE, err)
+		err = m.handleViolation(VIOLATION_INVALID_INPUT_FILE, fmt.Errorf("input file is empty: %s", path))
 		return asYaml, err
 	}
 
 	if err := yaml.Unmarshal(fileContent, &asYaml); err != nil {
-		err = m.handleViolation(VIOLATION_INVALID_INPUT_FILE, err)
+		err = m.handleViolation(VIOLATION_INVALID_INPUT_FILE, fmt.Errorf("input not valid yaml: %s", path))
 		return asYaml, err
 	}
 

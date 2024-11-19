@@ -34,6 +34,7 @@ var mergeCmd = &cobra.Command{
 		mergedBytes, _ := yaml.Marshal(mergedObj)
 
 		for _, v := range m.Voliations {
+			fmt.Println(v)
 			logrus.WithFields(logrus.Fields{}).Log(v.Level, v.Error())
 		}
 
