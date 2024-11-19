@@ -6,7 +6,6 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 
@@ -34,8 +33,7 @@ var mergeCmd = &cobra.Command{
 		mergedBytes, _ := yaml.Marshal(mergedObj)
 
 		for _, v := range m.Voliations {
-			fmt.Println(v)
-			logrus.WithFields(logrus.Fields{}).Log(v.Level, v.Error())
+			fmt.Println(v.Violation, v.Err.Error())
 		}
 
 		if len(m.Voliations) > 0 {
